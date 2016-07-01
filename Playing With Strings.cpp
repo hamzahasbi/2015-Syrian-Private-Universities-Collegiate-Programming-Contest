@@ -1,6 +1,6 @@
 /*
-	Author: Hamza Hasbi
-	Date: 16-Jun-16 5:14:01 PM
+	Author: Anass BENDARSI 
+	Date: 16/06/2016 13:14:50
 */
 #include<bits/stdc++.h>
 #define ll long long
