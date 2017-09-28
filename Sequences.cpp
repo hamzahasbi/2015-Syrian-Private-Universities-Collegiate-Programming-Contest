@@ -1,68 +1,62 @@
 /*
 	Author: Hamza Hasbi
-	Date: 17-Jun-16 11:06:27 PM
+	Copyrights: "h.hamza" ==> "www.hamzahasbi.me"
+	Date: 07/09/2017 15:55:29
 */
 #include<bits/stdc++.h>
 #define ll long long
 #define ld long double
-#define ans 100000
+#define ull unsigned long long
+#define uld unsigned long double
+#define ui unsigned int
+#define ud unsigned double
+#define uf unsigned float
+#define pi 2*acos(0.0)
+#define module cin.ignore()
+#define rep(i,l,r) for(auto i=l;i<=r;i++)
+#define range(x,y) for(auto x:y)
+//inline long longlcm(ll a,ll b) {return a*b/__gcd(a,b);}
+//inline long long gcd(ll a,ll b) {return 1LL*b == 0 ? a : gcd(1LL*b, a*1LL % b*1LL);}
 using namespace std;
-ll search (vector<ll>a,ll x)
-{
-	ll minx=ans;
-	for(ll i=0;i<a.size();i++)
-	{
-		if(a[i]>x && a[i]<minx) 
-		{
-			minx=a[i];
-		}
-	}
-	return minx;
-}
-main()
-{
-	ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-	int t ;
-	cin>>t;
-	while(t--)
-	{
-		ll n;
-		cin>>n;
-		vector<vector<ll>> tab(20002);
-		ll x;
-		ll maxx=0,c=0,indice=-1;
-		for(ll i=1;i<=n;i++)
-		{
-			cin>>x;
-			tab[x].push_back(i);
-		}
-		/*for(ll i=0;i<=7;i++)
-		{
-			for(int j=0;j<tab[i].size();j++)
-			cout<<i<<"  "<<tab[i][j]<<" ";
-			cout<<endl;
-		}*/		
-		for(ll i=0;i<=20000;i++)
-		{
-			ll r=search(tab[i],indice);
-			//cout<<indice<<" "<<r<<endl;
-			if(tab[i].size()>0 && r!=ans) 
-			{
-				indice=r;
-				c++;
-			}
-			else 
-			{
-				if(c>maxx) maxx=c;
-				indice=-1;
-				c=0;
-			}
-		}
-		if(c>maxx) maxx=c;
-		cout<<maxx<<endl;
-	}
-	//cout << flush;
-  return 0;
-}
 
+int main()
+{
+
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	
+	int t;
+	cin >> t;
+	while(t--){
+		
+		int n;
+		cin >> n;
+		vector <int> a(n);
+		vector <vector<int> > pos(200000);
+		for(int i = 0; i < n; ++i){
+			cin >> a[i];
+			pos[a[i]].push_back(i);
+		}
+		int best = 0;
+		for(int i = 0; i < n; ++i){
+		      int next = a[i] + 1;
+		      int len = 1;
+		      int ind = i;
+		      while (1) {
+		        if (pos[next].size() == 0) break;
+		        auto it = lower_bound(pos[next].begin(),pos[next].end(),ind);
+		        if (it != pos[next].end()) {
+		          next ++;
+		          ind = *it;
+		        }
+		        else break;
+		        len ++;
+		      }
+		      
+		      best=max(best,len);
+		}
+		cout << best << endl;
+	}
+	
+	return 0;
+}
